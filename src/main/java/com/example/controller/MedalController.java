@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -24,14 +22,7 @@ public class MedalController {
 
     @GetMapping
     public List<Medal> getAllMedals(){
-        List<Medal> medals = new ArrayList<>();
-        Iterator<Medal> iterator = medalRepository
-                .findAll()
-                .iterator();
-        while(iterator.hasNext()){
-            medals.add(iterator.next());
-        }
-        return medals;
+        return medalRepository.findAll();
     }
 
     @PutMapping

@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -29,14 +27,7 @@ public class AthleteController {
 
     @GetMapping
     public List<Athlete> getAllAthletes(){
-        List<Athlete> athletes = new ArrayList<>();
-        Iterator<Athlete> iterator = athleteRepository
-                .findAll()
-                .iterator();
-        while(iterator.hasNext()){
-            athletes.add(iterator.next());
-        }
-        return athletes;
+        return athleteRepository.findAll();
     }
 
     @PutMapping
