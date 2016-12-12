@@ -17,7 +17,7 @@ public class Athlete {
     private String surname;
     private String nacionality;
     private LocalDate birthday;
-    @OneToMany(mappedBy = "athlete")
+    @OneToMany(mappedBy = "athlete", cascade = CascadeType.ALL) //hay que añadir el cascade para poder hacer el delete
     @JsonIgnore
     private Set<Medal> medals = new HashSet<>();
 
