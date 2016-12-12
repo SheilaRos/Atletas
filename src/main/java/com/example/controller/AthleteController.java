@@ -4,9 +4,11 @@ import com.example.domain.Athlete;
 import com.example.domain.MedalType;
 import com.example.repository.AthleteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -48,6 +50,16 @@ public class AthleteController {
                 .findAll()
                 .parallelStream()
                 .collect(groupingBy(Athlete::getNacionality));
+    }
+    @GetMapping("/ByBirthdayBeforeThan/{birthday}")
+    //@PathVariable --> sirve para indicar que hay una variable en la url
+    // @DateTimeFormat(pattern = "dd-MM-yyyy") --> sirve para indicar el tipo de fecha valido
+    public List<Athlete> getAthleteBirthday(@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy")LocalDate birthday){
+        return athleteRepository.findByBirthdayBefore(birthday);
+    }
+    @GetMapping("/ByNacionality/{nacionality}")
+    public List<Athlete> getAthleteNacionalityIs(@PathVariable String nacionality){
+        return athleteRepository.findByNacionalityIs(nacionality);
     }
 
     @GetMapping("/GroupByMedalType")
